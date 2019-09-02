@@ -15,7 +15,8 @@ class EnterEnemy extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.changeEnemy(this.state.value)
+    this.props.changeEnemy(this.state.value);
+    this.setState({value: ''});
   }
 
   render () {
