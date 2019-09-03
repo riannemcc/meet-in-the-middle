@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Rubocop Analysis:' do
+RSpec.describe 'Rubocop Compliance Analysis:' do
   subject(:report) { `rubocop` }
 
-  it 'has no offenses' do
+  it 'Has no offenses.' do
     expect(report).to match(/no\ offenses\ detected/)
   end
 end
