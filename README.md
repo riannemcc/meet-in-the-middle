@@ -1,24 +1,13 @@
-# README
+# Meet in the Middle
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### A Makers Final Project ft. Rianne, Genny, Richie, Toby, Tim and Will. 
 
-Things you may want to cover:
+An app which allows the user to input the location of their friends and decide on a fair meeting point between them. The resulting location will generate a list of recommended places to visit such as bars and restaurants. 
 
-* Ruby version
+Steps to run the app:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`brew install yarn`  
+`bundle install`  
+`npm install`  
+`yarn install --check-files`  
+`rails s`  
