@@ -1,10 +1,12 @@
 import React from "react"
+import MapContainer from "./MapContainer"
 import PropTypes from "prop-types"
 class App extends React.Component {
   render () {
     return (
-      <React.Fragment>
-      </React.Fragment>
+      <div>
+        <MapContainer />
+      </div>
     );
   }
 }
