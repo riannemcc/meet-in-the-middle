@@ -1,12 +1,15 @@
 import React from "react";
+import Script from "react-load-script";
 import PropTypes from "prop-types";
 
 class EnterLocation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
+    this.state = { query: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleScriptLoad = this.handleScriptLoad.bind(this);
+    this.handlePlaceSelect = this.handlePlaceSelect.bind(this);
   }
 
   handleChange(event) {
@@ -15,59 +18,63 @@ class EnterLocation extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.changeLocation(this.state.value);
-    this.setState({ value: "" });
+    let address = this.state.query.split(' ').join('+')
+    let url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "+CA&key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY"
+    fetch(url)
+    .then(json => json.json())
+    .then(response => this.props.updateMarkers(response.results[0].geometry.location))
+    .then(response => this.setState({query: ''}))
   }
 
-  // setLocationA() {
-  //   var input = document.getElementById("locationA");
-  //   var searchBox = new google.maps.places.SearchBox(input);
-  //   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  // }
-  //
-  // var markers = [];
-  // searchBox.addListener("places_changed", function(){
-  //   if(places.length == 0) {
-  //     return;
-  //   }
-  //
-  //   markers.forEach(function(marker){
-  //     marker.setMap(null);
-  //   });
-  //   markers = [];
-  //
-  //   var bounds = new google.maps.LatLngBounds();
-  //   places.forEach(function(place){
-  //     if (!place.geometry){
-  //       console.log("Returned place contains no geometry");
-  //       return;
-  //     }
-  //     var icon = {
-  //       url: place.icon,
-  //       size: new google.maps.Size(71, 71),
-  //       origin: new google.maps.Point(0, 0),
-  //       anchor: new google.maps.Point(17, 34),
-  //       scaledSize: new google.maps.Size(25, 25)
-  //     };
-  //     })
-  //   })
-  // })
+  handleScriptLoad(e) {
+    this.setState({ query: e.target.value });
+    console.log("handle script load");
+    let sw = new google.maps.LatLng(51.425564, -0.330801)
+    let ne = new google.maps.LatLng(51.681786, 0.301162)
+    let london = new google.maps.LatLngBounds(sw, ne)
+    var input = document.getElementById("autocomplete")
+    var options = { bounds: london };
+    let autocomplete = new google.maps.places.Autocomplete(input, options);
+    console.log(autocomplete);
+    autocomplete.setFields(["address_components", "formatted_address"]);
+    autocomplete.addListener(autocomplete, "place_changed", this.handlePlaceSelect());
+  }
+
+  handlePlaceSelect() {
+    console.log(autocomplete)
+    let addressObject = autocomplete.getPlace();
+    console.log(addressObject.formatted_address)
+    let address = addressObject.address_components;
+
+    if (address) {
+      this.setState({
+        query: addressObject.formatted_address
+      });
+    }
+  }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          ENTER LOCATION:
+      <div>
+        <Script
+          url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY&libraries=places"
+          onLoad={this.handleScriptLoad}
+        />
+        <form onSubmit={this.handleSubmit}>
           <input
-            id="locationA"
+            id="autocomplete"
             type="text"
             placeholder="Where are you?"
-            value={this.state.value}
-            onChange={this.handleChange}
+            value={this.state.query}
+            onChange={this.handleScriptLoad}
+            style={{
+              margin: "0 auto",
+              width:500
+            }}
           />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 }

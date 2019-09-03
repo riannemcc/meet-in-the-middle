@@ -16,7 +16,7 @@ class LocationA extends React.Component {
   render() {
     return (
       <div>
-        <EnterLocation changeLocation={this.selectLocation} />
+        <EnterLocation updateMarkers={this.props.updateMarkers} changeLocation={this.selectLocation} />
       </div>
     );
   }
