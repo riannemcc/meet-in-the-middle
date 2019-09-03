@@ -1,0 +1,13 @@
+language: ruby
+cache:
+- bundler
+services:
+- postgresql
+before_script:
+- bundle exec rake db:create
+- bundle exec rake db:migrate
+deploy:
+  provider: heroku
+  api_key:
+    secure: POvwoWyZEzDmHHmC5Ir8i/shZ+/iI949KFL3ywVk3KdW54VRLkra8I4CZYqDHmMHuHxofJHUL981tRa4X3zbTqsQS+JF/maBypTFW6RR3Gcv3CJm1AvqFGwGSaBXHKSRz9TI9bgZGpX/93dnwejjLuyQmP+iiZ0C5tfdSK0fwS7jyYatEh3vSC10r9Fdkt+H+0wnYdNd0b70LYhaNLsFsOkJ2quPnm37XfNpf+6qyC+yFFFLivKohUYoN2taoDN3psjEjW/1de5sxg7uL9eEMBz+Oe05oj8dI7/imgRYLIuq2YOSD1JkrjQbSeGxq/iQzV8E8OLdvGb97j0zi775CN/irjOJfW+7W/kz4BGM/eyNJqmmv+rrLHHIKH9RmEuAw7wLP10Pka9xMrTPBeovpki/5U/laJvqovpDPlF1QjO3bfrINX6HdKknptcFrNe1lYigwIjh/9twePnzTqi50+jAmuwTMDDiVfkfWqmAnsXKlNx/HpV+1QhZJF/oMZbfsx9dlt3xQuMOphLlGIfIr4atnoHbDAH9u51kVf3GIKKTZoMJY7Fn5lvHRTE95QCY9Jo5ULNMiarC9cyDBwJjbJOEAPgOqZmkRp1khLl2siONR9V/EBtJoLr8Kw4nEyqnYNni3upWlv4+/1IV/OkTm4xywhQCeOXVGrV4RyABbbg=
+  app: midl
