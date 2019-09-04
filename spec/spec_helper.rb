@@ -10,9 +10,9 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
                                                                ])
 
 SimpleCov.start 'rails' do
-  add_filter '/bin/'
-  add_filter '/db/'
-  add_filter '/spec/'
+  # add_filter '/bin/'
+  # add_filter '/db/'
+  # add_filter '/spec/'
 end
 
 require 'rails_helper'
