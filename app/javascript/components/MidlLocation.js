@@ -2,7 +2,7 @@ import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
 
-class EnterLocation extends React.Component {
+class MidlLocation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,11 +29,13 @@ class EnterLocation extends React.Component {
     });
     var input = document.getElementsByClassName("address_text_box")
     var text_box_array = Array.prototype.slice.call( input )
+    console.log(text_box_array)
     text_box_array.forEach(function(node) {
       let autocomplete = new google.maps.places.Autocomplete(node, this.getOptions());
       autocomplete.setFields(["address_components", "formatted_address"]);
       autocomplete.addListener("place_changed", () => {
         let addressObject = autocomplete.getPlace();
+        console.log(addressObject.formatted_address)
         let address = addressObject.address_components;
 
         if (address) {
@@ -58,53 +60,10 @@ class EnterLocation extends React.Component {
   render() {
     return (
       <div style={{margin:10}}>
-        <Script
-          url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY&libraries=places"
-          onLoad={this.handleScriptLoad}
-        />
-        <p style={{marginLeft:"10px", fontFamily:"Verdana", padding:"5px"}}>First enter your location</p>
-        <form onSubmit={(e) => { this.handleSubmit('query1', e)} }>
-          <input
-            id="address_text_box1"
-            className="address_text_box"
-            type="text"
-            placeholder={`Where ${this.props.who}?`}
-            value={this.state.query1}
-            onChange={(e) => { this.handleScriptLoad('query1', e) } }
-            style={{
-              padding:5,
-              width:350,
-              marginRight:10,
-              borderRadius:10
-            }}
-          />
-          <input type="submit" id="find_yourself" value="Find" />
-
-        </form>
-        <p style={{marginLeft:"10px", fontFamily:"Verdana", padding:"5px"}}>Now enter your friend's location</p>
-        <form onSubmit={(e) => { this.handleSubmit('query2', e)} }>
-          <input
-            id="address_text_box2"
-            className="address_text_box"
-            type="text"
-            placeholder={`Where ${this.props.who}?`}
-            value={this.state.query2}
-            onChange={(e) => { this.handleScriptLoad('query2', e) } }
-            style={{
-              padding:5,
-              width:350,
-              marginRight:10,
-              borderRadius:10
-            }}
-          />
-          <input type="submit" id="find_a_friend" value="Find" />
-
-        </form>
-        <input onClick={this.props.addMidlMarker} type="submit" value="Find Midl" />
-
+        <p style={{marginLeft:"10px", fontFamily:"Verdana", padding:"5px"}}>Your Midl point is: lat: 51.5091, lng: -0.1074098</p>
       </div>
     );
   }
 }
 
-export default EnterLocation;
+export default MidlLocation;

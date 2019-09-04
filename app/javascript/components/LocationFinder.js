@@ -20,6 +20,7 @@ class LocationFinder extends React.Component {
           who={'are you'}
           updateMarkers={this.props.updateMarkers}
           changeLocation={this.selectLocation}
+          addMidlMarker={this.props.addMidlMarker}
         />
       </div>
     );

@@ -2,7 +2,8 @@ import React from "react";
 import MapContainer from "./MapContainer";
 import LocationFinder from "./LocationFinder";
 import PropTypes from "prop-types";
-import "./styles.css"
+import "./styles.css";
+import MidlLocation from "./MidlLocation";
 
 
 class App extends React.Component {
@@ -17,25 +18,45 @@ class App extends React.Component {
     };
     this.updateMarkers = this.updateMarkers.bind(this);
     this.updateMarkersSearch = this.updateMarkersSearch.bind(this);
+    this.findXMidl = this.findXMidl.bind(this);
+    this.findYMidl = this.findYMidl.bind(this);
   }
 
-  updateMarkers(props, marker, e) {
+  updateMarkers() {
+    console.log('updateMarkers')
+    console.log(this.findXMidl)
+    console.log(this.findYMidl)
     this.setState(state => {
       let newMarker = {
         name: "Test",
-        position: { lat: e.latLng.lat(), lng: e.latLng.lng() }
+        position: { lat: this.findXMidl(), lng: this.findYMidl() }
       };
       const markers = [...state.markers, newMarker];
       return {
         value: "",
-        mapCenterLat: e.latLng.lat(),
-        mapCenterLng: e.latLng.lng(),
+        mapCenterLat: this.findXMidl(),
+        mapCenterLng: this.findYMidl(),
         markers
       };
     });
   }
 
+  findXMidl() {
+    let xSum = this.state.markers[0].position.lat + this.state.markers[1].position.lat
+    let x3 = xSum / 2
+    console.log(x3)
+    return x3
+  }
+
+  findYMidl() {
+    let ySum = this.state.markers[0].position.lng + this.state.markers[1].position.lng
+    let y3 = ySum / 2
+    console.log(y3)
+    return y3
+  }
+
   updateMarkersSearch(position) {
+    console.log('calling updateMarkersSearch')
     this.setState(state => {
       let newMarker = {
         name: "Test",
@@ -49,13 +70,17 @@ class App extends React.Component {
         markers
       };
     });
+    console.log(this.state.markers)
   }
 
   render() {
     return (
       <div style={{margin:"0px"}}>
         <div className="locationFormContainer">
-          <LocationFinder updateMarkers={this.updateMarkersSearch} />
+          <LocationFinder addMidlMarker={this.updateMarkers} updateMarkers={this.updateMarkersSearch} />
+        </div>
+        <div className="midlLocationContainer">
+          <MidlLocation />
         </div>
         <div>
           <MapContainer updateMarkers={this.updateMarkers} mapCenterLat={this.state.mapCenterLat} mapCenterLng={this.state.mapCenterLng} markers={this.state.markers} />
