@@ -16,7 +16,7 @@ export class MapContainer extends React.Component {
 
   render () {
     if (this.props.item === undefined) { return <div>Loading....</div>; }
-    else { 
+    else {
     return (
       <div id="map">
       <Map
@@ -40,6 +40,7 @@ export class MapContainer extends React.Component {
  );
 }
 
+}
 }
 
 export default GoogleApiWrapper({
