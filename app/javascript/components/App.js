@@ -41,14 +41,12 @@ class App extends React.Component {
   findXMidl() {
     let xSum = this.state.markers[0].position.lat + this.state.markers[1].position.lat
     let x3 = xSum / 2
-    console.log(x3)
     return x3
   }
 
   findYMidl() {
     let ySum = this.state.markers[0].position.lng + this.state.markers[1].position.lng
     let y3 = ySum / 2
-    console.log(y3)
     return y3
   }
 

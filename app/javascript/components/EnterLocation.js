@@ -23,26 +23,24 @@ class EnterLocation extends React.Component {
       .then(response => this.props.updateMarkers(response.results[0].geometry.location))
   }
 
-  handleScriptLoad(query, e) {
+  handleScriptLoad(query, event) {
     this.setState({
-      [query]: e.target.value
+      [query]: event.target.value
     });
-    var input = document.getElementsByClassName("address_text_box")
-    var text_box_array = Array.prototype.slice.call( input )
-    text_box_array.forEach(function(node) {
-      let autocomplete = new google.maps.places.Autocomplete(node, this.getOptions());
-      autocomplete.setFields(["address_components", "formatted_address"]);
-      autocomplete.addListener("place_changed", () => {
-        let addressObject = autocomplete.getPlace();
-        let address = addressObject.address_components;
+    let autocomplete = new google.maps.places.Autocomplete(event.target, this.getOptions());
+    autocomplete.setFields(["address_components", "formatted_address"]);
+    autocomplete.addListener("place_changed", () => this._setAddress(autocomplete, query));
+  }
 
-        if (address) {
-          this.setState({
-            [query]: addressObject.formatted_address
-          });
-        }
+  _setAddress(autocomplete, query) {
+    let addressObject = autocomplete.getPlace();
+    let address = addressObject.address_components;
+
+    if (address) {
+      this.setState({
+        [query]: addressObject.formatted_address
       });
-    }, this);
+    }
   }
 
   getOptions() {
