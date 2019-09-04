@@ -1,69 +1,45 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import "./styles.css"
+import React from "react"
+import PropTypes from "prop-types"
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
 
+// Geocode.setApiKey("AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY")
+//
+// Geocode.fromLatLng("51.517432", "-0.073262").then(
+//   response => {
+//     const address = response.results[0].formatted_)address;
+//     console.log(address);
+//   },
+// )
+
+//
 export class MapContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
 
-  render() {
+  render () {
     return (
       <div id="map">
-        <Map
-          google={this.props.google}
-          zoom={18}
-          initialCenter={{
-            lat: this.props.mapCenterLat,
-            lng: this.props.mapCenterLng
-          }}
-          center={{
-            lat: this.props.mapCenterLat,
-            lng: this.props.mapCenterLng
-          }}
-          options={{
-            zoomControl: true,
-            mapTypeControl: false,
-            scaleControl: true,
-            streetViewControl: false,
-            rotateControl: false,
-            fullscreenControl: false
-          }}
-        >
-          {this.props.markers.map(
-            function(marker, i) {
-              return (
-                <Marker
-                  onClick={this.onMarkerClick}
-                  key={i}
-                  title={marker.name}
-                  name={marker.name}
-                  position={{
-                    lat: marker.position.lat,
-                    lng: marker.position.lng
-                  }}
-                >
-                  <InfoWindow
-                    visible={true}
-                    style={{zIndex:"500"}}
-                    >
-                      <div>
-                        <p>Click on the map or drag the marker to select location where the incident occurred</p>
-                      </div>
-                  </InfoWindow>
-                </Marker>
-              );
-            }.bind(this)
-          )}
-        </Map>
-      </div>
-    );
-  }
+      <Map
+       google={this.props.google}
+       zoom={18}
+       initialCenter={{
+             lat: 51.517432,
+             lng: -0.073262,
+       }}
+       options={{
+         zoomControl: true,
+         mapTypeControl: false,
+         scaleControl: true,
+         streetViewControl: false,
+         rotateControl: false,
+         fullscreenControl: false
+       }}
+     >
+     </Map>
+   </div>
+ );
+}
+
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY"
-})(MapContainer);
+ apiKey: ("AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY&libraries=places")
+})(MapContainer)
