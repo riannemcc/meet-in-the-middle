@@ -52,7 +52,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <div style={{
+        }}>
           <LocationA updateMarkers={this.updateMarkersSearch} />
         </div>
         <div>

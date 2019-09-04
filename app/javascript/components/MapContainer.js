@@ -14,7 +14,6 @@ export class MapContainer extends React.Component {
       <div id="map">
         <Map
           google={this.props.google}
-          onClick={this.props.updateMarkers}
           zoom={18}
           initialCenter={{
             lat: this.props.mapCenterLat,

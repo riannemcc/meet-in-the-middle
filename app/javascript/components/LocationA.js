@@ -16,7 +16,11 @@ class LocationA extends React.Component {
   render() {
     return (
       <div>
-        <EnterLocation updateMarkers={this.props.updateMarkers} changeLocation={this.selectLocation} />
+        <EnterLocation
+          who={'are you'}
+          updateMarkers={this.props.updateMarkers}
+          changeLocation={this.selectLocation}
+        />
       </div>
     );
   }
