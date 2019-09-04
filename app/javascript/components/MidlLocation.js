@@ -6,61 +6,21 @@ class MidlLocation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query1: "",
-      query2: ""
+      value: ''
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleScriptLoad = this.handleScriptLoad.bind(this);
-    this.getOptions = this.getOptions.bind(this);
+    this.midlLocation = this.midlLocation.bind(this);
   }
 
-  handleSubmit(query, event) {
-    event.preventDefault();
-    let address = this.state[query].split(' ').join('+')
-    let url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "+CA&key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY"
-    fetch(url)
-      .then(json => json.json())
-      .then(response => this.props.updateMarkers(response.results[0].geometry.location))
-  }
-
-  handleScriptLoad(query, e) {
-    this.setState({
-      [query]: e.target.value
-    });
-    var input = document.getElementsByClassName("address_text_box")
-    var text_box_array = Array.prototype.slice.call( input )
-    console.log(text_box_array)
-    text_box_array.forEach(function(node) {
-      let autocomplete = new google.maps.places.Autocomplete(node, this.getOptions());
-      autocomplete.setFields(["address_components", "formatted_address"]);
-      autocomplete.addListener("place_changed", () => {
-        let addressObject = autocomplete.getPlace();
-        console.log(addressObject.formatted_address)
-        let address = addressObject.address_components;
-
-        if (address) {
-          this.setState({
-            [query]: addressObject.formatted_address
-          });
-        }
-      });
-    }, this);
-  }
-
-  getOptions() {
-    let sw = new google.maps.LatLng(51.425564, -0.330801);
-    let ne = new google.maps.LatLng(51.681786, 0.301162);
-    let london = new google.maps.LatLngBounds(sw, ne);
-    var options = {
-      bounds: london
-    };
-    return options
+  midlLocation(){
+    if (this.props.markers[2]) {
+      return `lat: ${this.props.markers[2].position.lat}, lng: ${this.props.markers[2].position.lng}`
+    }
   }
 
   render() {
     return (
       <div style={{margin:10}}>
-        <p style={{marginLeft:"10px", fontFamily:"Verdana", padding:"5px"}}>Your Midl point is: lat: 51.5091, lng: -0.1074098</p>
+        <p style={{marginLeft:"10px", fontFamily:"Verdana", padding:"5px"}}>Your Midl point is: {this.midlLocation()}</p>
       </div>
     );
   }

@@ -23,9 +23,6 @@ class App extends React.Component {
   }
 
   updateMarkers() {
-    console.log('updateMarkers')
-    console.log(this.findXMidl)
-    console.log(this.findYMidl)
     this.setState(state => {
       let newMarker = {
         name: "Test",
@@ -56,7 +53,6 @@ class App extends React.Component {
   }
 
   updateMarkersSearch(position) {
-    console.log('calling updateMarkersSearch')
     this.setState(state => {
       let newMarker = {
         name: "Test",
@@ -70,7 +66,6 @@ class App extends React.Component {
         markers
       };
     });
-    console.log(this.state.markers)
   }
 
   render() {
@@ -80,7 +75,7 @@ class App extends React.Component {
           <LocationFinder addMidlMarker={this.updateMarkers} updateMarkers={this.updateMarkersSearch} />
         </div>
         <div className="midlLocationContainer">
-          <MidlLocation />
+          <MidlLocation markers={this.state.markers}/>
         </div>
         <div>
           <MapContainer updateMarkers={this.updateMarkers} mapCenterLat={this.state.mapCenterLat} mapCenterLng={this.state.mapCenterLng} markers={this.state.markers} />
