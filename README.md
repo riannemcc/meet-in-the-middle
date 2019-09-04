@@ -7,6 +7,8 @@ An app which allows the user to input the location of their friends and decide o
 
 Steps to run the app:
 
+`rails db:create`
+`rails db:migrate`
 `brew install yarn`  
 `bundle install`  
 `npm install`  
