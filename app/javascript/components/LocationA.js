@@ -16,6 +16,7 @@ class LocationA extends React.Component {
   render() {
     return (
       <div>
+        <p style={{marginLeft:"10px", fontFamily:"Verdana", padding:"5px"}}>First enter your location</p>
         <EnterLocation
           who={'are you'}
           updateMarkers={this.props.updateMarkers}

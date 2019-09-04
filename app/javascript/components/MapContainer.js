@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import "./styles.css"
 
 export class MapContainer extends React.Component {
   constructor(props) {
@@ -44,7 +45,16 @@ export class MapContainer extends React.Component {
                     lat: marker.position.lat,
                     lng: marker.position.lng
                   }}
-                />
+                >
+                  <InfoWindow
+                    visible={true}
+                    style={{zIndex:"500"}}
+                    >
+                      <div>
+                        <p>Click on the map or drag the marker to select location where the incident occurred</p>
+                      </div>
+                  </InfoWindow>
+                </Marker>
               );
             }.bind(this)
           )}
