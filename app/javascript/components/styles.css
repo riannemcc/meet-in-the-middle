@@ -4,7 +4,7 @@
   height: 50;
   background-color: #ebf2ff;
   position:absolute;
-  z-index: 50000;
+  z-index: 2;
   top: 200px;
   left: 30px;
   border-radius: 20px;

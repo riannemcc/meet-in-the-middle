@@ -64,6 +64,7 @@ class EnterLocation extends React.Component {
           url="https://maps.googleapis.com/maps/apis/js?key=AIzaSyAawXbpm33d8IIULhhrq-5JtHKwcacKbcY&libraries=places"
           onLoad={this.handleScriptLoad}
         />
+        <p style={{marginLeft:"10px", fontFamily:"Verdana", padding:"5px"}}>First enter your location</p>
         <form onSubmit={(e) => { this.handleSubmit('query1', e)} }>
           <input
             id="address_text_box1"
@@ -82,6 +83,7 @@ class EnterLocation extends React.Component {
           <input type="submit" id="find_yourself" value="Find" />
 
         </form>
+        <p style={{marginLeft:"10px", fontFamily:"Verdana", padding:"5px"}}>Now enter your friend's location</p>
         <form onSubmit={(e) => { this.handleSubmit('query2', e)} }>
           <input
             id="address_text_box2"
@@ -100,6 +102,8 @@ class EnterLocation extends React.Component {
           <input type="submit" id="find_a_friend" value="Find" />
 
         </form>
+        <input type="submit" value="Find Midl" />
+
       </div>
     );
   }
