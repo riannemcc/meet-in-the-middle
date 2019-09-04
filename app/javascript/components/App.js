@@ -1,6 +1,6 @@
 import React from "react";
 import MapContainer from "./MapContainer";
-import LocationA from "./LocationA";
+import LocationFinder from "./LocationFinder";
 import PropTypes from "prop-types";
 import "./styles.css"
 
@@ -55,7 +55,7 @@ class App extends React.Component {
     return (
       <div style={{margin:"0px"}}>
         <div className="locationFormContainer">
-          <LocationA updateMarkers={this.updateMarkersSearch} />
+          <LocationFinder updateMarkers={this.updateMarkersSearch} />
         </div>
         <div>
           <MapContainer updateMarkers={this.updateMarkers} mapCenterLat={this.state.mapCenterLat} mapCenterLng={this.state.mapCenterLng} markers={this.state.markers} />

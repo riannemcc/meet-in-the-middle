@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import EnterLocation from "./EnterLocation";
 
-class LocationA extends React.Component {
+class LocationFinder extends React.Component {
   constructor(props) {
     super(props);
     this.state = { location: "" };
@@ -27,4 +27,4 @@ class LocationA extends React.Component {
   }
 }
 
-export default LocationA;
+export default LocationFinder;
