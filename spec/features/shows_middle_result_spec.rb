@@ -8,6 +8,6 @@ feature 'the user can enter a 2nd address' do
     (find_by_id 'address_text_box2').fill_in with: 'Westminster, London SW1A 1AA, UK'
     click_button('find_a_friend')
     click_button('Find Midl')
-    expect(page).to have_content 'Your Midl point is: lat: 51.5091, lng: -0.1074098'
+    expect(page).to have_content 'Your Midl point is: lat: 51.50935915, lng: -0.10757234999999998'
   end
 end
