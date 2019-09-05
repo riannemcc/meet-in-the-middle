@@ -13,7 +13,7 @@ class LocationFinder extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.loadAutocomplete = this.loadAutocomplete.bind(this);
     this.getOptions = this.getOptions.bind(this);
-  }
+  } 
 
   handleSubmit(query, event) {
     event.preventDefault();
