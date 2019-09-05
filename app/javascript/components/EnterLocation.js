@@ -1,6 +1,7 @@
 import React from "react";
 import Script from "react-load-script";
 import PropTypes from "prop-types";
+import "./styles.css"
 
 class EnterLocation extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class EnterLocation extends React.Component {
       query2: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleScriptLoad = this.handleScriptLoad.bind(this);
+    this.loadAutocomplete = this.loadAutocomplete.bind(this);
     this.getOptions = this.getOptions.bind(this);
   }
 
@@ -23,7 +24,7 @@ class EnterLocation extends React.Component {
       .then(response => this.props.updateMarkers(response.results[0].geometry.location))
   }
 
-  handleScriptLoad(query, event) {
+  loadAutocomplete(query, event) {
     this.setState({
       [query]: event.target.value
     });
@@ -66,39 +67,27 @@ class EnterLocation extends React.Component {
             id="address_text_box1"
             className="address_text_box"
             type="text"
-            placeholder={`Where ${this.props.who}?`}
+            placeholder={"Where are you?"}
             value={this.state.query1}
-            onChange={(e) => { this.handleScriptLoad('query1', e) } }
-            style={{
-              padding:5,
-              width:350,
-              marginRight:10,
-              borderRadius:10
-            }}
+            onChange={(e) => { this.loadAutocomplete('query1', e) } }
           />
           <input type="submit" id="find_yourself" value="Find" />
 
         </form>
         <p style={{marginLeft:"10px", fontFamily:"Verdana", padding:"5px"}}>Now enter your friend's location</p>
-        <form onSubmit={(e) => { this.handleSubmit('query2', e)} }>
+        <form onSubmit={(event) => { this.handleSubmit('query2', event)} }>
           <input
             id="address_text_box2"
             className="address_text_box"
             type="text"
-            placeholder={`Where ${this.props.who}?`}
+            placeholder={"Where's your friend?"}
             value={this.state.query2}
-            onChange={(e) => { this.handleScriptLoad('query2', e) } }
-            style={{
-              padding:5,
-              width:350,
-              marginRight:10,
-              borderRadius:10
-            }}
+            onChange={(event) => { this.loadAutocomplete('query2', event) } }
           />
           <input type="submit" id="find_a_friend" value="Find" />
 
         </form>
-        <input onClick={this.props.addMidlMarker} type="submit" value="Find Midl" />
+        <input onClick={this.props.addMidlMarker} className="myButton" type="submit" value="Find Midl" />
 
       </div>
     );
